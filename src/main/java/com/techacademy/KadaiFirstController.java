@@ -17,11 +17,15 @@ public class KadaiFirstController {
         
         LocalDate date = LocalDate.parse(cleanedDateStr, DateTimeFormatter.BASIC_ISO_DATE);
         DayOfWeek dayOfWeek = date.getDayOfWeek();
-        String dayOfWeekName = dayOfWeek.toString();
+        String dayOfWeekName = formatDayOfWeek(dayOfWeek);
         
         return dayOfWeekName;
     }
-        
+
+    private String formatDayOfWeek(DayOfWeek dayOfWeek) {
+        String originalName = dayOfWeek.name();
+        return Character.toUpperCase(originalName.charAt(0)) + originalName.substring(1).toLowerCase();
+    }
     
     @GetMapping("/plus/{val1}/{val2}")
     public String calcPlus(@PathVariable int val1, @PathVariable int val2){
